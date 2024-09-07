@@ -1,0 +1,78 @@
+// Define color variables
+$green: #28a745;
+$red: #dc3545;
+$yellow: #ffc107;
+$gray: #6c757d;
+$black : #000;
+@mixin myTheme($color) {
+  & {
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
+    height: 2.6em;
+    line-height: 2.5em;
+    margin: 20px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid $color !important;
+    transition: color 0.5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: $color !important;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: $color !important;
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+    top: 100%;
+    left: 100%;
+    transition: all 0.7s;
+  }
+
+  &:hover {
+    color: #fff !important;
+  }
+
+  &:hover:before {
+    top: -30px;
+    left: -30px;
+  }
+
+  &:active:before {
+    background: $color !important;
+    transition: background 0s;
+  }
+}
+
+// Apply the mixin to classes
+.success {
+  @include myTheme($green);
+}
+
+.error {
+  @include myTheme($red);
+}
+
+.warning {
+  @include myTheme($yellow);
+}
+
+.disabled {
+  @include myTheme($gray);
+  pointer-events: none;
+}
+
+.start {
+  @include myTheme($black);
+  &:hover {
+    color: #fff !important;
+  }
+}
